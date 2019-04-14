@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Integration Demo</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="app-header__content">
+        <h1 class="app-header__title">jQuery to Vue Demo</h1>
+      </div>
+    </header>
+    <!-- End App Header -->
+
+    <!-- App Main -->
+    <main class="app-main">
+
+      <!-- Begin Vue Todo App -->
+      <div id="vue-todos" class="todos">
+        <h3 class="todos__title">Your Todo List</h3>
+        <form class="todos__form" @submit.prevent="submit">
+          <div class="combobox">
+            <input type="text" v-model="text" class="text-input" placeholder="What do you need to do?" autofocus autocomplete="off">
+            <button type="submit">Add Todo</button>
+          </div>
+        </form>
+
+        <div class="todos__content">
+          <transition-group name="todos">
+            <v-todo-item v-for="todo of todos" :todo="todo" :key="todo.id" @remove="remove" @complete="complete" />
+          </transition-group>
+        </div>
+      </div>
+      <!-- End Vue Todo App -->
+    </main>
+    <!-- End App Main -->
+
+    <!-- App Footer -->
+    <footer class="app-footer">
+    </footer>
+    <!-- End App Footer -->
+
+    <!-- App Snackbar Container -->
+    <div class="app-snackbar-container" id="vue-snackbar">
+      <transition-group name="slide">
+        <v-snackbar-item v-for="item of queue" @remove="remove" :key="item.id" :item="item"></v-snackbar-item>
+      </transition-group>
+    </div>
+    <!-- End App Snackbar Container -->
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Vue Development Script -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script src="src/index.js"></script>
+  <script src="src/todoService.js"></script>
+  <script src="src/snackbar-item.vue.js"></script>
+  <script src="src/snackbar.vue.js"></script>
+  <script src="src/todo-item.vue.js"></script>
+  <script src="src/todo.vue.js"></script>
+</body>
+
+</html>
